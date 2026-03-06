@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { FadeIn, StaggerContainer } from "@/components/scroll-animations"
@@ -10,7 +11,7 @@ const products = [
   {
     id: 1,
     name: "CarPlay Filaire",
-    description: "Adaptateur plug & play pour une connexion stable et fiable via câble USB.",
+    description: "Adaptateur plug and play pour une connexion stable et fiable via câble USB.",
     price: "149",
     image: "/images/carplay-wired.jpg",
     icon: Cable,
@@ -21,6 +22,7 @@ const products = [
       "Audio haute qualité",
     ],
     popular: false,
+    href: "/produits/carplay-filaire",
   },
   {
     id: 2,
@@ -36,6 +38,7 @@ const products = [
       "Batterie longue durée",
     ],
     popular: true,
+    href: "#contact",
   },
   {
     id: 3,
@@ -51,6 +54,7 @@ const products = [
       "Garantie 2 ans",
     ],
     popular: false,
+    href: "#contact",
   },
 ]
 
@@ -84,8 +88,7 @@ export function ProductsSection() {
                   Populaire
                 </div>
               )}
-              
-              {/* Product image */}
+
               <div className="aspect-video bg-muted relative overflow-hidden border-b border-border">
                 <Image
                   src={product.image}
@@ -129,12 +132,19 @@ export function ProductsSection() {
                       )}
                     </div>
                   </div>
-                  <Button 
-                    className="w-full gap-2" 
+                  <Button
+                    className="w-full gap-2"
                     variant={product.popular ? "default" : "outline"}
+                    asChild
                   >
-                    {product.price === "Sur devis" ? "Demander un devis" : "Commander"}
-                    <ArrowRight className="w-4 h-4" />
+                    <Link href={product.href}>
+                      {product.id === 1
+                        ? "Voir les modèles"
+                        : product.price === "Sur devis"
+                          ? "Demander un devis"
+                          : "Commander"}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </Button>
                 </div>
               </div>
